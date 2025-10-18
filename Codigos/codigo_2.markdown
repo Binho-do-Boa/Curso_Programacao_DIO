@@ -1,5 +1,5 @@
 def verificar_comando(comando):
-    # Caracteres suspeitos para injeção de comando
+# Caracteres suspeitos para injeção de comando
     caracteres_suspeitos = [';', '&', '|', '$']
     
     # Verifica se algum dos caracteres suspeitos está no comando
