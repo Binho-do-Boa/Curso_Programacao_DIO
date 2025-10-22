@@ -20,5 +20,5 @@ Você deverá implementar, documentar e compartilhar um projeto prático utiliza
 
 **Ransomware Simulado:** Criar arquivos de teste, implementar um script que criptografa e descriptografa, além de gerar mensagem de “resgate”.  
 
-** Trojan com formulario Bancario:** Criar um trojan para aparecer apresentar uma tela para usuario colocar usuario e senha e o mesmo ser enviado por email para atacante.
+**Trojan com formulario Bancario:** Criar um trojan para aparecer apresentar uma tela para usuario colocar usuario e senha e o mesmo ser enviado por email para atacante.
 
