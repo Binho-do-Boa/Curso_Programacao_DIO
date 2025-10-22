@@ -14,7 +14,7 @@ Em cibersegurança, é fundamental monitorar a entrada de dados fornecidos pelo 
 O objetivo é identificar se o comando fornecido contém caracteres frequentemente utilizados para executar múltiplos comandos de forma encadeada ou maliciosa. A seguir, você encontrará as regras de detecção e os critérios para marcar um comando como suspeito: O comando será considerado suspeito se contiver qualquer um dos seguintes caracteres: ;, &, |, ou $. Se o comando contiver qualquer um desses caracteres, será considerado suspeito e o sistema deve alertar sobre um possível risco de injeção de comando. Com isso, o sistema deve garantir que comandos potencialmente maliciosos sejam identificados, alertando os usuários ou equipes de segurança sobre tentativas de exploração do sistema.
 
 ## Desafio 03
-Você deverá implementar, documentar e compartilhar um projeto prático utilizando Python, simulando o comportamento de malwares em um ambiente seguro. \n
-**Keylogger Simulado:** programar captura de teclas em arquivo .txt, torná-lo mais furtivo e implementar envio automático por e-mail. \n
-**Ransomware Simulado:** criar arquivos de teste, implementar um script que criptografa e descriptografa, além de gerar mensagem de “resgate”.
+Você deverá implementar, documentar e compartilhar um projeto prático utilizando Python, simulando o comportamento de malwares em um ambiente seguro.   
+**Keylogger Simulado:** programar captura de teclas em arquivo .txt, torná-lo mais furtivo e implementar envio automático por e-mail.   
+**Ransomware Simulado:** criar arquivos de teste, implementar um script que criptografa e descriptografa, além de gerar mensagem de “resgate”.  
 
