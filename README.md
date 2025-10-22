@@ -15,6 +15,8 @@ O objetivo é identificar se o comando fornecido contém caracteres frequentemen
 
 ## Desafio 03
 Você deverá implementar, documentar e compartilhar um projeto prático utilizando Python, simulando o comportamento de malwares em um ambiente seguro.   
+
 **Keylogger Simulado:** programar captura de teclas em arquivo .txt, torná-lo mais furtivo e implementar envio automático por e-mail.   
+
 **Ransomware Simulado:** criar arquivos de teste, implementar um script que criptografa e descriptografa, além de gerar mensagem de “resgate”.  
 
